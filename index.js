@@ -23,10 +23,12 @@
      * @param {int} pageIndex 页码
      */
     function fetchBooks(pageIndex) {
+        currentIndex=pageIndex;
+        localStorage.setItem("page", pageIndex);
         let pageSize = 20;
         let novelListDiv = document.querySelector("div.novel-list");
-        let loadingDiv=document.createElement("div");
-        loadingDiv.className="loading";        
+        let loadingDiv = document.createElement("div");
+        loadingDiv.className = "loading";
         novelListDiv.appendChild(loadingDiv);
         fetch("/data.json")
             .then((response) => response.json())
@@ -40,7 +42,7 @@
                     pageSize
                 );
                 if (novels.length <= 0) {
-                    currentIndex = currentIndex - 1;
+                    currentIndex = pageIndex - 1;
                     loadingDiv.remove();
                     return;
                 }
@@ -83,7 +85,7 @@
 
         novelDisplay.appendChild(novelContentDiv);
         let loadingDiv = document.createElement("div");
-        loadingDiv.className = "loading";        
+        loadingDiv.className = "loading";
         novelContentDiv.appendChild(loadingDiv);
         document.body.appendChild(novelDisplay);
         fetch(novelItem.filepath)
@@ -93,5 +95,11 @@
             });
     }
     bindEvents();
-    fetchBooks(currentIndex);
+    let pageIndex = localStorage.getItem("page");
+    if (pageIndex) {
+        pageIndex = parseInt(pageIndex);
+    } else {
+        pageIndex = 1;
+    }
+    fetchBooks(pageIndex);
 })();

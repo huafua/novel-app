@@ -71,7 +71,7 @@ div.loading {
     animation: try-loading 0.5s ease infinite;
     text-shadow: 0 0 2px #333;
 }
-div.loading::before{
+div.loading::before {
     content: "加载中...";
 }
 
@@ -111,7 +111,7 @@ div.op div {
     transition: all 0.2s ease;
 }
 
-div.op div:hover{
+div.op div:hover {
     background-color: #f6d16e;
 }
 ::-webkit-scrollbar {
