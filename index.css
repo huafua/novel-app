@@ -108,8 +108,12 @@ div.novel-title div.close:hover {
 
 div.op div {
     flex: 1;
+    transition: all 0.2s ease;
 }
 
+div.op div:hover{
+    background-color: #f6d16e;
+}
 ::-webkit-scrollbar {
     width: 5px;
 }

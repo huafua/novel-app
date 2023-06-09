@@ -41,6 +41,7 @@
                 );
                 if (novels.length <= 0) {
                     currentIndex = currentIndex - 1;
+                    loadingDiv.remove();
                     return;
                 }
                 novelListDiv.innerHTML = "";
