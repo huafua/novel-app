@@ -1,6 +1,21 @@
 (() => {
-    let currentIndex = 1;
+    let currentIndex = 1,
+        username = "root",
+        password = "huafua",
+        pageKey = "page",
+        lastReadKey = "lastReadIndex",
+        lastReadClassName = "last-read";
 
+    function doLogin(usernameInput, passwordInput, loginMaskDiv) {
+        return (e) => {
+            if (
+                usernameInput.value == username &&
+                passwordInput.value == password
+            ) {
+                loginMaskDiv.classList.add("success");
+            }
+        };
+    }
     /**
      * 绑定事件
      */
@@ -12,12 +27,10 @@
         let usernameInput = loginMaskDiv.querySelector("input#username");
         let passwordInput = loginMaskDiv.querySelector("input#password");
         let loginBtn = loginMaskDiv.querySelector("input#btn-login");
-        loginBtn.onclick = function () {
-            if (
-                usernameInput.value == "root" &&
-                passwordInput.value == "huafua"
-            ) {
-                loginMaskDiv.classList.add("success");
+        loginBtn.onclick = doLogin(usernameInput, passwordInput, loginMaskDiv);
+        usernameInput.onkeydown = passwordInput.onkeydown = function (e) {
+            if (e.keyCode == 13) {
+                doLogin(usernameInput, passwordInput, loginMaskDiv)(e);
             }
         };
         prevDiv.onclick = function () {
@@ -36,7 +49,7 @@
      */
     function fetchBooks(pageIndex) {
         currentIndex = pageIndex;
-        localStorage.setItem("page", pageIndex);
+        localStorage.setItem(pageKey, pageIndex);        
         let pageSize = 20;
         let novelListDiv = document.querySelector("div.novel-list");
         let loadingDiv = document.createElement("div");
@@ -59,14 +72,33 @@
                     return;
                 }
                 novelListDiv.innerHTML = "";
-                novels.forEach((novelItem) => {
+                let lastReadIndex = localStorage.getItem(lastReadKey);
+                if (!lastReadIndex) lastReadIndex = 0;
+                // 這個index的作用是用於確定當前是第幾個小説
+                let novelItemDivs = [];
+                novels.forEach((novelItem, index) => {
                     let itemDiv = document.createElement("div");
                     itemDiv.innerHTML = novelItem.name;
                     itemDiv.className = "novel-item";
-                    itemDiv.onclick = function () {
-                        showNovel(novelItem);
-                    };
+                    if (index == parseInt(lastReadIndex)) {
+                        itemDiv.classList.add(lastReadClassName);
+                    } else {
+                        itemDiv.classList.remove(lastReadClassName);
+                    }
+                    novelItemDivs.push(itemDiv);
                     novelListDiv.appendChild(itemDiv);
+                });
+
+                novelItemDivs.forEach((itemDiv, i) => {
+                    itemDiv.onclick = function () {
+                        novelItemDivs.forEach((i) => {
+                            if (i != itemDiv) {
+                                i.classList.remove(lastReadClassName);
+                            }
+                        });
+                        this.classList.add(lastReadClassName);
+                        showNovel(novels[i], i);
+                    };
                 });
             });
     }
@@ -75,7 +107,8 @@
      *展示小说
      * @param {{name:string,filepath:string}} novelItem 小说对象，包含小说名和路径
      */
-    function showNovel(novelItem) {
+    function showNovel(novelItem, index) {
+        localStorage.setItem(lastReadKey, index);
         let novelDisplay = document.createElement("div");
         novelDisplay.style.zIndex = 100;
         novelDisplay.style.backgroundColor = "white";
@@ -107,7 +140,7 @@
             });
     }
     bindEvents();
-    let pageIndex = localStorage.getItem("page");
+    let pageIndex = localStorage.getItem(pageKey);
     if (pageIndex) {
         pageIndex = parseInt(pageIndex);
     } else {

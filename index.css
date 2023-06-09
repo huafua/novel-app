@@ -26,6 +26,9 @@ div.novel-list div.novel-item {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+div.novel-list div.novel-item.last-read{
+    color: red;
+}
 
 div.novel-list div.novel-item:hover {
     background-color: #fff;
