@@ -78,6 +78,10 @@
         novelContentDiv.className = "novel-content";
 
         novelDisplay.appendChild(novelContentDiv);
+        let loadingDiv = document.createElement("div");
+        loadingDiv.className = "loading";
+        loadingDiv.innerHTML="加载中...";
+        novelContentDiv.appendChild(loadingDiv);
         document.body.appendChild(novelDisplay);
         fetch(novelItem.filepath)
             .then((response) => response.text())
