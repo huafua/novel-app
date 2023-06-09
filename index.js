@@ -25,6 +25,9 @@
     function fetchBooks(pageIndex) {
         let pageSize = 20;
         let novelListDiv = document.querySelector("div.novel-list");
+        let loadingDiv=document.createElement("div");
+        loadingDiv.className="loading";        
+        novelListDiv.appendChild(loadingDiv);
         fetch("/data.json")
             .then((response) => response.json())
             .then((data) => {
@@ -79,8 +82,7 @@
 
         novelDisplay.appendChild(novelContentDiv);
         let loadingDiv = document.createElement("div");
-        loadingDiv.className = "loading";
-        loadingDiv.innerHTML="加载中...";
+        loadingDiv.className = "loading";        
         novelContentDiv.appendChild(loadingDiv);
         document.body.appendChild(novelDisplay);
         fetch(novelItem.filepath)

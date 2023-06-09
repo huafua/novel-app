@@ -54,11 +54,12 @@ div.novel-content {
     position: relative;
 }
 
-div.novel-content div.loading {
+div.loading {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background-color: #efefef;
+    background-color: #eeeeeeb9;
+    box-shadow: 0 0 20px 0 #888;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -69,6 +70,9 @@ div.novel-content div.loading {
     font-size: 2em;
     animation: try-loading 0.5s ease infinite;
     text-shadow: 0 0 2px #333;
+}
+div.loading::before{
+    content: "加载中...";
 }
 
 @keyframes try-loading {
