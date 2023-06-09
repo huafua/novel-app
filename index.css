@@ -12,6 +12,7 @@ div.novel-container {
 div.novel-list {
     flex: 1;
     background-color: #fff2cd;
+    overflow-y: auto;
 }
 
 div.novel-list div.novel-item {
