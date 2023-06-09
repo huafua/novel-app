@@ -1,0 +1,75 @@
+div.novel-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: calibri;
+}
+
+div.novel-list {
+    flex: 1;
+    background-color: #fff2cd;
+}
+
+div.novel-list div.novel-item {
+    height: 30px;
+    padding: 5px;
+    text-indent: 10px;
+    line-height: 30px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+div.novel-list div.novel-item:hover {
+    background-color: #fff;
+}
+
+div.op,
+div.novel-title {
+    height: 40px;
+    display: flex;
+    line-height: 40px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    background-color: #fade91;
+    font-weight: bolder;
+}
+
+div.novel-content {
+    flex: 1;
+    border: 0;
+    padding: 20px 0;
+    overflow: auto;
+}
+
+div.novel-title {
+    width: 100%;
+    justify-content: center;
+}
+
+div.novel-title div.close {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    top: 0;
+    left: 0;
+}
+div.novel-title div.close:hover{
+    color: white;
+    background-color: #e1b742;
+}
+
+div.op div {
+    flex: 1;
+}
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #888;
+}
