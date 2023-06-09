@@ -13,6 +13,7 @@
                 passwordInput.value == password
             ) {
                 loginMaskDiv.classList.add("success");
+                localStorage.setItem("login", "1");
             }
         };
     }
@@ -23,16 +24,6 @@
         let prevDiv = document.querySelector("div.prev");
         let nextDiv = document.querySelector("div.next");
         let homeDiv = document.querySelector("div.home");
-        let loginMaskDiv = document.querySelector("div.login-mask");
-        let usernameInput = loginMaskDiv.querySelector("input#username");
-        let passwordInput = loginMaskDiv.querySelector("input#password");
-        let loginBtn = loginMaskDiv.querySelector("input#btn-login");
-        loginBtn.onclick = doLogin(usernameInput, passwordInput, loginMaskDiv);
-        usernameInput.onkeydown = passwordInput.onkeydown = function (e) {
-            if (e.keyCode == 13) {
-                doLogin(usernameInput, passwordInput, loginMaskDiv)(e);
-            }
-        };
         prevDiv.onclick = function () {
             if (currentIndex > 1) fetchBooks(--currentIndex);
         };
@@ -42,6 +33,20 @@
         homeDiv.onclick = function () {
             fetchBooks(1);
         };
+        let loginMaskDiv = document.querySelector("div.login-mask");
+        if (localStorage.getItem("login") === "1") {
+            loginMaskDiv.classList.add("success");
+            return;
+        }
+        let usernameInput = loginMaskDiv.querySelector("input#username");
+        let passwordInput = loginMaskDiv.querySelector("input#password");
+        let loginBtn = loginMaskDiv.querySelector("input#btn-login");
+        loginBtn.onclick = doLogin(usernameInput, passwordInput, loginMaskDiv);
+        usernameInput.onkeydown = passwordInput.onkeydown = function (e) {
+            if (e.keyCode == 13) {
+                doLogin(usernameInput, passwordInput, loginMaskDiv)(e);
+            }
+        };
     }
     /**
      * 根据指定页码获取到对应的小说列表
@@ -49,7 +54,7 @@
      */
     function fetchBooks(pageIndex) {
         currentIndex = pageIndex;
-        localStorage.setItem(pageKey, pageIndex);        
+        localStorage.setItem(pageKey, pageIndex);
         let pageSize = 20;
         let novelListDiv = document.querySelector("div.novel-list");
         let loadingDiv = document.createElement("div");
