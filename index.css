@@ -116,6 +116,7 @@ div.op div:hover{
 }
 ::-webkit-scrollbar {
     width: 5px;
+    height: 5px;
 }
 ::-webkit-scrollbar-thumb {
     background-color: #888;
