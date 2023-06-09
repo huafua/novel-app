@@ -7,11 +7,15 @@
     function bindEvents() {
         let prevDiv = document.querySelector("div.prev");
         let nextDiv = document.querySelector("div.next");
+        let homeDiv = document.querySelector("div.home");
         prevDiv.onclick = function () {
             if (currentIndex > 1) fetchBooks(--currentIndex);
         };
         nextDiv.onclick = function () {
             fetchBooks(++currentIndex);
+        };
+        homeDiv.onclick = function () {
+            fetchBooks(1);
         };
     }
     /**
