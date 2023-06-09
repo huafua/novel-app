@@ -22,6 +22,9 @@ div.novel-list div.novel-item {
     line-height: 30px;
     transition: all 0.2s ease;
     cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 div.novel-list div.novel-item:hover {
@@ -48,7 +51,7 @@ div.novel-content {
     position: relative;
 }
 
-div.novel-content div.loading{
+div.novel-content div.loading {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -56,7 +59,7 @@ div.novel-content div.loading{
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     line-height: 200px;
     text-align: center;
     font-weight: bolder;
@@ -65,16 +68,16 @@ div.novel-content div.loading{
     text-shadow: 0 0 2px #333;
 }
 
-@keyframes try-loading{
-    0%{
+@keyframes try-loading {
+    0% {
         color: #0f0;
         line-height: 200px;
     }
-    50%{
+    50% {
         color: #fade91;
         line-height: 210px;
     }
-    100%{
+    100% {
         color: #f00;
         line-height: 190px;
     }
@@ -91,7 +94,7 @@ div.novel-title div.close {
     top: 0;
     left: 0;
 }
-div.novel-title div.close:hover{
+div.novel-title div.close:hover {
     color: white;
     background-color: #e1b742;
 }
@@ -100,9 +103,9 @@ div.op div {
     flex: 1;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 5px;
 }
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background-color: #888;
 }
