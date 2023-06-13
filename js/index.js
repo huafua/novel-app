@@ -114,35 +114,7 @@
      */
     function showNovel(novelItem, index) {
         localStorage.setItem(lastReadKey, index);
-        let novelDisplay = document.createElement("div");
-        novelDisplay.style.zIndex = 100;
-        novelDisplay.style.backgroundColor = "white";
-        novelDisplay.className = "novel-container";
-        let novelTitleDiv = document.createElement("div");
-        novelTitleDiv.className = "novel-title";
-        novelTitleDiv.innerHTML = novelItem.name;
-        let close = document.createElement("div");
-        close.className = "close";
-        close.innerHTML = "&lt;";
-        close.onclick = function () {
-            novelDisplay.remove();
-            novelDisplay = null;
-        };
-        novelTitleDiv.appendChild(close);
-        novelDisplay.appendChild(novelTitleDiv);
-        let novelContentDiv = document.createElement("div");
-        novelContentDiv.className = "novel-content";
-
-        novelDisplay.appendChild(novelContentDiv);
-        let loadingDiv = document.createElement("div");
-        loadingDiv.className = "loading";
-        novelContentDiv.appendChild(loadingDiv);
-        document.body.appendChild(novelDisplay);
-        fetch(novelItem.filepath)
-            .then((response) => response.text())
-            .then((data) => {
-                novelContentDiv.innerHTML = data;
-            });
+        window.open(`detail.html?title=${novelItem.name}&filepath=${novelItem.filepath}`);
     }
     bindEvents();
     let pageIndex = localStorage.getItem(pageKey);

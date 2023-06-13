@@ -1,0 +1,80 @@
+@import url(common.css);
+
+
+div.novel-list {
+    flex: 1;
+    background-color: #fff2cd;
+    overflow-y: auto;
+}
+
+div.novel-list div.novel-item {
+    height: 30px;
+    padding: 5px;
+    text-indent: 10px;
+    line-height: 30px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+div.novel-list div.novel-item.last-read{
+    color: red;
+}
+
+div.novel-list div.novel-item:hover {
+    background-color: #fff;
+}
+
+
+div.op div {
+    flex: 1;
+    transition: all 0.2s ease;
+}
+
+div.op div:hover {
+    background-color: #f6d16e;
+}
+
+div.login-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #efefef;
+    transition: all 0.5s ease;
+}
+div.login-mask.success{
+    top: -100vh;
+}
+
+div.login-mask div.login-detail {
+    width: 200px;
+    margin: 100px auto;
+    border: 1px #ddd solid;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+div.login-mask div.login-detail div.avatar {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 10px;
+}
+div.login-mask div.login-detail div.row {
+    display: flex;
+    height: 40px;
+    margin: 5px 0;
+}
+div.login-mask div.login-detail div.row input {
+    flex: 1;
+    width: 100%;
+    border: 1px #efefef solid;
+    outline: none;
+    text-indent: 5px;
+    border-radius: 5px;
+}
+div.login-mask div.login-detail div.row input[type="button"] {
+    font-weight: bolder;
+}
