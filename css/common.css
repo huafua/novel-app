@@ -46,6 +46,52 @@ div.loading::before {
     content: "加载中...";
 }
 
+div.another-loading {
+    width: 90px;
+    height: 30px;
+    position: relative;
+    margin: 100px auto;
+    transform: rotate(180deg);
+
+}
+div.another-loading::before,
+div.another-loading::after,
+div.another-loading > div {
+    content: "";
+    display: block;
+    width: 28px;
+    position: absolute;
+    top: 0;
+    background-color: rgba(133, 133, 133, 0.548);
+    animation: loading 1s ease-in-out infinite;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+div.another-loading::before {
+    left: 0;
+}
+div.another-loading > div {
+    left: 31px;
+    animation-delay: 0.33s;
+}
+div.another-loading::after {
+    left: 62px;
+    animation-delay: 0.67s;
+}
+
+@keyframes loading {
+    from {
+        height: 0px;
+    }
+    50% {
+        height: 30px;
+    }
+    to {
+        height: 0px;
+    }
+}
+
+
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;

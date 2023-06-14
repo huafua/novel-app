@@ -20,14 +20,28 @@
                 setTimeout(() => {
                     messageDiv.classList.remove("show");
                     messageDiv.classList.remove("fail");
-                },1000);
+                }, 1000);
             } else {
                 messageDiv.innerHTML = "賬號密碼錯誤!";
                 messageDiv.classList.add("fail");
             }
-           
         };
     }
+    
+    function createAnotherLoadingDiv() {
+        let anotherDiv = document.createElement("div");
+        anotherDiv.className = "another-loading";
+        let innerDiv = document.createElement("div");
+        anotherDiv.appendChild(innerDiv);
+        return anotherDiv;
+    }
+
+    function createLoadingDiv() {
+        let loadingDiv = document.createElement("div");
+        loadingDiv.className = "loading";
+        return loadingDiv;
+    }
+
     /**
      * 绑定事件
      */
@@ -84,8 +98,8 @@
         localStorage.setItem(pageKey, pageIndex);
         let pageSize = 20;
         let novelListDiv = document.querySelector("div.novel-list");
-        let loadingDiv = document.createElement("div");
-        loadingDiv.className = "loading";
+
+        let loadingDiv = createAnotherLoadingDiv();
         novelListDiv.appendChild(loadingDiv);
         fetch("/data.json")
             .then((response) => response.json())
