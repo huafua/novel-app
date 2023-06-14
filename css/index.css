@@ -7,6 +7,19 @@ div.novel-list {
     overflow-y: auto;
 }
 
+div.message{
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    color: rgb(1, 157, 1);
+    display: none!important;
+}
+div.message.show{
+    display: flex!important;
+}
+div.message.fail{
+    color: rgb(222, 9, 38);
+}
 div.novel-list div.novel-item {
     height: 30px;
     padding: 5px;

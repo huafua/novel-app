@@ -4,17 +4,29 @@
         password = "huafua",
         pageKey = "page",
         lastReadKey = "lastReadIndex",
-        lastReadClassName = "last-read";
+        lastReadClassName = "last-read",
+        statusKey = "login";
 
-    function doLogin(usernameInput, passwordInput, loginMaskDiv) {
+    function doLogin(usernameInput, passwordInput, loginMaskDiv, messageDiv) {
         return (e) => {
+            messageDiv.classList.add("show");
             if (
                 usernameInput.value == username &&
                 passwordInput.value == password
             ) {
+                localStorage.setItem(statusKey, "1");
                 loginMaskDiv.classList.add("success");
-                localStorage.setItem("login", "1");
+                messageDiv.innerHTML = "登錄成功!";
+                messageDiv.classList.remove("fail");
+                setTimeout(() => {
+                    messageDiv.classList.remove("show");
+                    messageDiv.classList.remove("fail");
+                },1000);
+            } else {
+                messageDiv.innerHTML = "賬號密碼錯誤!";
+                messageDiv.classList.add("fail");
             }
+           
         };
     }
     /**
@@ -24,6 +36,8 @@
         let prevDiv = document.querySelector("div.prev");
         let nextDiv = document.querySelector("div.next");
         let homeDiv = document.querySelector("div.home");
+        let closeDiv = document.querySelector("div.close");
+        let messageDiv = document.querySelector("div.message");
         prevDiv.onclick = function () {
             if (currentIndex > 1) fetchBooks(--currentIndex);
         };
@@ -33,18 +47,32 @@
         homeDiv.onclick = function () {
             fetchBooks(1);
         };
+        closeDiv.onclick = function () {
+            loginMaskDiv.classList.remove("success");
+            localStorage.removeItem(statusKey);
+        };
         let loginMaskDiv = document.querySelector("div.login-mask");
-        if (localStorage.getItem("login") === "1") {
+        if (localStorage.getItem(statusKey) === "1") {
             loginMaskDiv.classList.add("success");
             return;
         }
         let usernameInput = loginMaskDiv.querySelector("input#username");
         let passwordInput = loginMaskDiv.querySelector("input#password");
         let loginBtn = loginMaskDiv.querySelector("input#btn-login");
-        loginBtn.onclick = doLogin(usernameInput, passwordInput, loginMaskDiv);
+        loginBtn.onclick = doLogin(
+            usernameInput,
+            passwordInput,
+            loginMaskDiv,
+            messageDiv
+        );
         usernameInput.onkeydown = passwordInput.onkeydown = function (e) {
             if (e.keyCode == 13) {
-                doLogin(usernameInput, passwordInput, loginMaskDiv)(e);
+                doLogin(
+                    usernameInput,
+                    passwordInput,
+                    loginMaskDiv,
+                    messageDiv
+                )(e);
             }
         };
     }
@@ -114,7 +142,9 @@
      */
     function showNovel(novelItem, index) {
         localStorage.setItem(lastReadKey, index);
-        window.open(`detail.html?title=${novelItem.name}&filepath=${novelItem.filepath}`);
+        window.open(
+            `detail.html?title=${novelItem.name}&filepath=${novelItem.filepath}`
+        );
     }
     bindEvents();
     let pageIndex = localStorage.getItem(pageKey);
