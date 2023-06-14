@@ -17,7 +17,6 @@
                 localStorage.setItem(statusKey, "1");
                 loginMaskDiv.classList.add("success");
                 messageDiv.innerHTML = "登錄成功!";
-                messageDiv.classList.remove("fail");
                 setTimeout(() => {
                     messageDiv.classList.remove("show");
                     messageDiv.classList.remove("fail");
