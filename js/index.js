@@ -46,11 +46,11 @@
         homeDiv.onclick = function () {
             fetchBooks(1);
         };
+        let loginMaskDiv = document.querySelector("div.login-mask");
         closeDiv.onclick = function () {
             loginMaskDiv.classList.remove("success");
             localStorage.removeItem(statusKey);
         };
-        let loginMaskDiv = document.querySelector("div.login-mask");
         if (localStorage.getItem(statusKey) === "1") {
             loginMaskDiv.classList.add("success");
             return;
